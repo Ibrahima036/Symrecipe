@@ -13,15 +13,19 @@
 				<li class="nav-item">
 					<a class="nav-link active" href="#">Home
 					</a>
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link active" href="{{path('ingredient.index')}}">Ingrédients
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="{{path('recipe.index')}}">Mes recettes
+							</a>
+						</li>
+					{% endif %}
+
 				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{{path('ingredient.index')}}">Ingrédients
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{{path('recipe.index')}}">Mes recettes
-					</a>
-				</li>
+
 			</ul>
 		</div>
 	</nav>

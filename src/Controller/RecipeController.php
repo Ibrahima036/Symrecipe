@@ -27,7 +27,7 @@ class RecipeController extends AbstractController
     public function index(RecipeRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
         $recipes = $paginator->paginate(
-            $repository->findAll(),
+            $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
@@ -46,12 +46,14 @@ class RecipeController extends AbstractController
     #[Route('/recipe/new', name: 'recipe.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
+        /** @var Recipe */
         $recipe = new Recipe();
         $form = $this->createForm(RecipeFormType::class, $recipe);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $recipe = $form->getData();
+            $recipe->setUser($this->getUser());
             $em->persist($recipe);
             $em->flush();
             return $this->redirectToRoute('recipe.index');

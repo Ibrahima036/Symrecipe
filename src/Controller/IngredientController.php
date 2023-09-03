@@ -26,10 +26,11 @@ class IngredientController extends AbstractController
      * @return Response
      */
     #[Route('/ingredient', name: 'ingredient.index')]
+    #[IsGranted('ROLE_USER')]
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $ingredients = $paginator->paginate(
-            $repository->findAll(),
+            $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
@@ -48,12 +49,14 @@ class IngredientController extends AbstractController
     #[Route('/ingredient/nouveau', name: 'ingredient.new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
+        /** @var Ingredient */
         $ingredient = new Ingredient();
         $form = $this->createForm(IngredientType::class, $ingredient);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $ingredient = $form->getData();
+            $ingredient->setUser($this->getUser());
             $em->persist($ingredient);
             $em->flush();
             $this->addFlash(
