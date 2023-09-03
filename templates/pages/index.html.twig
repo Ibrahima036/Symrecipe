@@ -1,15 +1,16 @@
 {% extends "base.html.twig" %}
-{% block title %}Home-Page{% endblock %}
+{% block title %}Home-Page
+{% endblock %}
 {% block body %}
-       <main class="container p-3">
-         <div class="jumbotron">
-        <h1 class="display-4">Bienvenu sur Symrecipe</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>Pour commencer render vous sur la page d'inscription .</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Inscription</a>
-        </p>
-        </div>
-       </main>
+	<main class="container p-3">
+		<div class="jumbotron">
+			<h1 class="display-4">Bienvenu sur Symrecipe</h1>
+			<p class="lead">SymRecipe est bien plus qu'un simple site de recettes. C'est une plateforme en ligne dédiée à l'art de la cuisine, conçue pour inspirer, éduquer et rassembler les passionnés de gastronomie du monde entier. Que vous soyez un chef expérimenté ou un novice en cuisine, SymRecipe offre une expérience culinaire inoubliable à tous ceux qui souhaitent explorer de nouvelles saveurs et techniques de préparation. **Points forts de SymRecipe :** 1. **Une Collection Époustouflante de Recettes : ** SymRecipe propose une vaste collection de recettes allant des plats classiques aux créations culinaires contemporaines. Vous y trouverez des options pour tous les goûts, des plats végétariens aux mets exotiques en passant par les desserts gourmands. 2. **Tutoriels Vidéo et Étapes</p>
+			<hr class="my-4">
+			<p>Pour commencer render vous sur la page d'inscription .</p>
+			<p class="lead">
+				<a class="btn btn-primary btn-lg" href="{{path('app_register')}}" role="button">Inscription</a>
+			</p>
+		</div>
+	</main>
 {% endblock %}
